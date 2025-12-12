@@ -3,28 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quest Menu</title>
+<title>Luda Elegant Solutions</title>
 <style>
-  /* --- ОНОВЛЕНИЙ СТИЛЬ ФОНУ --- */
+  /* --- СТИЛЬ ФОНУ (Бежевий + Олива + Золото) --- */
   body {
-    /* Основний світло-бежевий колір */
     background-color: #faf0e6; 
     
-    /* Створення візерунка нашаруванням градієнтів */
+    /* Складний візерунок фону */
     background-image: 
-        /* Шар 1: Золоті лінії (діагональ в один бік) */
+        /* Золоті лінії */
         repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(212, 175, 55, 0.5) 60px, rgba(212, 175, 55, 0.5) 61px),
-        /* Шар 2: Золоті лінії (діагональ в інший бік) */
         repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(212, 175, 55, 0.5) 60px, rgba(212, 175, 55, 0.5) 61px),
-        /* Шар 3: Оливкова пляма (верхній лівий кут) */
+        /* Оливкові плями */
         radial-gradient(circle at 20% 35%, rgba(112, 130, 56, 0.3) 0%, transparent 50%),
-        /* Шар 4: Оливкова пляма (нижній правий кут) */
         radial-gradient(circle at 75% 60%, rgba(112, 130, 56, 0.3) 0%, transparent 55%),
-        /* Шар 5: Оливкова пляма (центр верху) */
         radial-gradient(circle at 50% 10%, rgba(112, 130, 56, 0.2) 0%, transparent 40%);
     
     background-position: center;
-    background-attachment: fixed; /* Фон не рухається при прокрутці */  
+    background-attachment: fixed;
     font-family: Fantasy, "Papyrus", serif;
     color: black;
     margin: 0;
@@ -36,16 +32,16 @@
   }
 
   h1 {
-    /* Градієнт тексту зробив трохи теплішим під новий фон */
+    /* Градієнт тексту */
     background: -webkit-linear-gradient(#3e2723, #8d6e63);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 30px;
     text-transform: uppercase;
     text-align: center;
-    font-size: 42px;
-    /* Додав легку золоту тінь для тексту */
+    font-size: 38px; /* Трохи менший шрифт, щоб влазила довга назва */
     text-shadow: 1px 1px 2px rgba(212, 175, 55, 0.3);
+    padding: 0 10px;
   }
 
   .menu-container {
@@ -57,19 +53,5 @@
     padding: 20px;
   }
 
-  /* Стиль кнопок-посилань */
-  .quest-link {
-    display: block;
-    text-decoration: none;
-    color: #3e2723;
-    /* Зробив фон кнопок трохи прозорішим, щоб просвічував візерунок */
-    background-color: rgba(255, 248, 235, 0.8);
-    /* Рамка тепер золотисто-оливкова */
-    border: 3px solid #8c7b50;
-    padding: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 12px;
-    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
-    /* Тінь кнопки
+  /* Стиль кнопок */
+  .quest-link
