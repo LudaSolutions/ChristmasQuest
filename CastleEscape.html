@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Castle Escape</title>
 <style>
-  /* --- ФОН --- */
+  /* --- BACKGROUND --- */
   body {
+    /* Фон старого паперу/мапи */
     background-image: url("https://as2.ftcdn.net/v2/jpg/03/05/42/51/1000_F_305425131_aPPCTLxFVDPAu35CPm5CCCVWXZsiUdbu.jpg");
-    background-color: #f4e4bc; 
+    background-color: #8d6e63; /* Коричневий колір, якщо картинка не завантажиться */
     background-position: center;
-    background-size: cover;   
-    font-family: Fantasy, "Papyrus", serif; 
-    color: black;
+    background-size: cover;
+    font-family: Fantasy, "Papyrus", serif; /* Шрифт у стилі фентезі */
     margin: 0;
     height: 100vh;
     display: flex;
@@ -21,138 +21,90 @@
     justify-content: center;
   }
 
-  /* --- КАРТКА (Контейнер) --- */
-  /* Це головне виправлення: біла підкладка, щоб все було видно */
+  /* --- CARD (SCROLL LOOK) --- */
   .card {
-    background-color: rgba(255, 255, 255, 0.7); /* Напівпрозорий білий */
-    padding: 30px;
-    border-radius: 15px;
-    border: 3px solid #5d4037;
+    /* Світло-бежевий фон, майже непрозорий (0.9), щоб текст читався */
+    background-color: rgba(255, 248, 235, 0.95); 
+    padding: 40px;
+    border-radius: 5px;
+    /* Подвійна рамка для ефекту старовини */
+    border: 6px double #3e2723; 
     text-align: center;
     width: 90%;
-    max-width: 350px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    max-width: 400px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
   }
 
-  h1, h2 {
-    color: #3e2723; /* Темно-коричневий, без градієнтів */
+  /* Заголовки */
+  h1 {
+    color: #2c1b18; /* Дуже темний коричневий */
     text-transform: uppercase;
     margin-top: 0;
-    text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+    font-size: 36px;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #3e2723;
+    padding-bottom: 10px;
+  }
+
+  h2 {
+    color: #3e2723;
+    margin-top: 0;
   }
   
   p {
     font-weight: bold;
-    color: #333; 
+    color: #4e342e; 
     font-size: 22px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
 
   /* Поле вводу */
   input {
     width: 80%;
-    padding: 12px;
-    font-size: 24px;
+    padding: 15px;
+    font-size: 26px;
     text-align: center;
-    border: 2px solid #5d4037;
+    border: 3px solid #5d4037;
     background: #fff;
-    border-radius: 5px;
+    border-radius: 4px;
     font-family: inherit;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: #333;
+    outline: none;
+  }
+  
+  input:focus {
+    border-color: #8d6e63;
+    background-color: #efebe9;
   }
   
   /* Кнопка */
   button {
-    color: #3e2723;
-    background-color: #d7ccc8;
-    border: 2px solid #5d4037;
-    padding: 12px 30px;
+    color: #fff;
+    background-color: #5d4037; /* Темна кнопка */
+    border: 2px solid #3e2723;
+    padding: 15px 35px;
     font-size: 24px;
     font-family: inherit;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 4px;
     font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    transition: background 0.3s;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #4e342e;
   }
   
   button:active {
-    transform: scale(0.98);
+    background-color: #3e2723;
   }
 
-  /* Текстове поле для підказки */
+  /* Текст підказки */
   textarea {
-    width: 90%;
-    height: 120px;
-    border: 2px solid #5c4033; 
-    background-color: #fff; 
-    padding: 15px;
-    color: black;
-    font-family: inherit;
-    font-size: 20px;
-    resize: none; 
-    text-align: center;
-    border-radius: 10px;
-  }
-
-  .hidden {
-    display: none !important;
-  }
-  
-  .error-msg {
-    color: #b71c1c; /* Яскраво-червоний */
-    font-size: 18px;
-    margin-top: 15px;
-    font-weight: bold;
-    min-height: 25px;
-  }
-</style>
-</head>
-<body>
-
-<div id="lock-screen" class="card">
-  <h1>Castle Gate</h1>
-  <p>Enter the secret code:</p>
-  
-  <input type="tel" id="code-input" placeholder="CODE">
-  <br>
-  <button onclick="checkCode()">OPEN</button>
-  
-  <div id="message" class="error-msg"></div>
-</div>
-
-<div id="success-screen" class="card hidden">
-  <h2>Gate Open!</h2>
-  
-  <textarea readonly>Your next clue:
-
-Look under the throne!</textarea>
-</div>
-
-<script>
-  // --- SETTINGS ---
-  const CORRECT_CODE = "777"; 
-  // ----------------
-
-  function checkCode() {
-    const input = document.getElementById('code-input').value;
-    const msg = document.getElementById('message');
-    
-    if (input.trim() === CORRECT_CODE) {
-      document.getElementById('lock-screen').classList.add('hidden');
-      document.getElementById('success-screen').classList.remove('hidden');
-    } else {
-      msg.textContent = "Wrong code!";
-      
-      const inputField = document.getElementById('code-input');
-      inputField.style.borderColor = "red";
-      setTimeout(() => { 
-          inputField.style.borderColor = "#5d4037"; 
-          msg.textContent = "";
-      }, 2000);
-    }
-  }
-</script>
-
-</body>
-</html>
+    width: 100%;
+    height: 140px;
+    border: 2px solid #5d4037; 
+    background-color: #fff8e1; /* Жовтувати
