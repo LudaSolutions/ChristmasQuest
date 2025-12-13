@@ -3,166 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secret Code</title>
+<title>Castle Escape</title>
 <style>
-  /* Background and text color */
-  body { 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background-color: #D2CBBA; /* Beige background */
-    color: #3E3A35; /* Dark brown text */
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    height: 100vh; 
-    margin: 0; 
-    padding: 20px; 
-    box-sizing: border-box; 
+  /* --- ФОН --- */
+  body {
+    background-image: url("https://as2.ftcdn.net/v2/jpg/03/05/42/51/1000_F_305425131_aPPCTLxFVDPAu35CPm5CCCVWXZsiUdbu.jpg");
+    background-color: #f4e4bc; 
+    background-position: center;
+    background-size: cover;   
+    font-family: Fantasy, "Papyrus", serif; 
+    color: black;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  h2 { 
-    margin-bottom: 25px; 
+  /* --- КАРТКА (Контейнер) --- */
+  /* Це головне виправлення: біла підкладка, щоб все було видно */
+  .card {
+    background-color: rgba(255, 255, 255, 0.7); /* Напівпрозорий білий */
+    padding: 30px;
+    border-radius: 15px;
+    border: 3px solid #5d4037;
     text-align: center;
-    font-weight: 600;
-    letter-spacing: 1px;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+
+  h1, h2 {
+    color: #3e2723; /* Темно-коричневий, без градієнтів */
     text-transform: uppercase;
+    margin-top: 0;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
   }
-
-  /* Input */
-  input { 
-    padding: 15px; 
-    font-size: 26px; 
-    text-align: center; 
-    border-radius: 8px; 
-    border: 2px solid #B0AB9F; 
-    background-color: #FDFCF8; 
-    color: #333;
-    width: 100%; 
-    max-width: 300px; 
-    margin-bottom: 20px; 
-    outline: none; 
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-  }
-  input:focus {
-    border-color: #8C867A;
-  }
-
-  /* Button */
-  button { 
-    padding: 15px 40px; 
-    font-size: 20px; 
+  
+  p {
     font-weight: bold;
-    background-color: #5D7556; /* Muted green */
-    border: none; 
-    border-radius: 8px; 
-    color: white; 
-    cursor: pointer; 
-    width: 100%; 
-    max-width: 300px; 
-    transition: background 0.2s, transform 0.1s; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    letter-spacing: 1px;
+    color: #333; 
+    font-size: 22px;
+    margin-bottom: 20px;
   }
-  button:active { 
-    background-color: #4A5F45; 
+
+  /* Поле вводу */
+  input {
+    width: 80%;
+    padding: 12px;
+    font-size: 24px;
+    text-align: center;
+    border: 2px solid #5d4037;
+    background: #fff;
+    border-radius: 5px;
+    font-family: inherit;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Кнопка */
+  button {
+    color: #3e2723;
+    background-color: #d7ccc8;
+    border: 2px solid #5d4037;
+    padding: 12px 30px;
+    font-size: 24px;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+  
+  button:active {
     transform: scale(0.98);
   }
 
-  /* Message */
-  #message { 
-    margin-top: 25px; 
-    font-size: 19px; 
-    text-align: center; 
-    min-height: 30px; 
-    font-weight: 500;
+  /* Текстове поле для підказки */
+  textarea {
+    width: 90%;
+    height: 120px;
+    border: 2px solid #5c4033; 
+    background-color: #fff; 
+    padding: 15px;
+    color: black;
+    font-family: inherit;
+    font-size: 20px;
+    resize: none; 
+    text-align: center;
+    border-radius: 10px;
   }
-  .hidden { display: none !important; }
-  .error { color: #C0392B; } 
 
-  /* Success */
-  .success-box { 
-    background: #fff; 
-    color: #333; 
-    padding: 30px 25px; 
-    border-radius: 12px; 
-    text-align: center; 
-    width: 100%; 
-    max-width: 380px;
-    border: 1px solid #B0AB9F;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  .hidden {
+    display: none !important;
   }
-  .success-text { 
-    color: #5D7556; 
-    font-weight: bold; 
-    font-size: 26px; 
-    margin-bottom: 15px; 
-    display: block;
-  }
-  .clue { 
-    font-size: 21px; 
-    border: 2px dashed #B0AB9F; 
-    padding: 20px; 
-    margin-top: 15px; 
-    background: #FDFCF8; 
-    display: block;
-    font-weight: 600; 
-    color: #3E3A35;
+  
+  .error-msg {
+    color: #b71c1c; /* Яскраво-червоний */
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: bold;
+    min-height: 25px;
   }
 </style>
 </head>
 <body>
 
-<div id="lock-screen">
-  <h2>🔒 ENTER ACCESS CODE</h2>
-  <input type="tel" id="code-input" placeholder="_____" maxlength="5" onfocus="this.value=''">
-  <button onclick="checkCode()">UNLOCK</button>
-  <div id="message"></div>
+<div id="lock-screen" class="card">
+  <h1>Castle Gate</h1>
+  <p>Enter the secret code:</p>
+  
+  <input type="tel" id="code-input" placeholder="CODE">
+  <br>
+  <button onclick="checkCode()">OPEN</button>
+  
+  <div id="message" class="error-msg"></div>
 </div>
 
-<div id="success-screen" class="hidden">
-  <div class="success-box">
-    <span class="success-text">🎉 ACCESS GRANTED!</span>
-    <p style="font-size: 18px;">You found the secret.</p>
-    
-    <span class="clue">The treasure is yours!</span> 
-    
-  </div>
+<div id="success-screen" class="card hidden">
+  <h2>Gate Open!</h2>
+  
+  <textarea readonly>Your next clue:
+
+Look under the throne!</textarea>
 </div>
 
 <script>
-  // --- PASSWORD SETTINGS ---
-  const CORRECT_CODE = "29471"; 
-  // -------------------------
+  // --- SETTINGS ---
+  const CORRECT_CODE = "777"; 
+  // ----------------
 
   function checkCode() {
-    const inputField = document.getElementById('code-input');
-    const input = inputField.value;
+    const input = document.getElementById('code-input').value;
     const msg = document.getElementById('message');
     
     if (input.trim() === CORRECT_CODE) {
       document.getElementById('lock-screen').classList.add('hidden');
       document.getElementById('success-screen').classList.remove('hidden');
     } else {
-      msg.textContent = "⛔ Incorrect code. Try again.";
-      msg.className = "error";
+      msg.textContent = "Wrong code!";
       
-      inputField.style.animation = "shake 0.5s";
-      setTimeout(() => { inputField.style.animation = ""; }, 500);
-      
-      setTimeout(() => { msg.textContent = ""; }, 2000);
+      const inputField = document.getElementById('code-input');
+      inputField.style.borderColor = "red";
+      setTimeout(() => { 
+          inputField.style.borderColor = "#5d4037"; 
+          msg.textContent = "";
+      }, 2000);
     }
   }
 </script>
-
-<style>
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  50% { transform: translateX(10px); }
-  75% { transform: translateX(-10px); }
-  100% { transform: translateX(0); }
-}
-</style>
 
 </body>
 </html>
